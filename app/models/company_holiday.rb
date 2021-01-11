@@ -1,0 +1,2 @@
+class CompanyHoliday < ApplicationRecord
+end

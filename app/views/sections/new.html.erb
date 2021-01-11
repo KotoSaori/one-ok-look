@@ -1,0 +1,28 @@
+<h1>部署管理</h1>
+<table>
+	<tbody>
+		<tr>
+			<td colspan="10">部署</td>
+			<td colspan="20">部署共有アドレス</td>
+		</tr>
+		<tr>
+			<%= form_for @section do |f| %>
+			<td colspan="10"><%= f.label :name %><%= f.text_field :name %></td>
+			<td colspan="20"><%= f.label :email %><%= f.text_field :email %></td>
+			<td colspan="2"><%= f.submit "登録" %></td>
+			<% end %>
+		</tr>
+		<tr>
+		  <td colspan="10">部署</td>
+			<td colspan="20">部署共有アドレス</td>
+		</tr>
+		
+		<% @sections.each do |section| %>
+		<tr>
+	     <td colspan="10"><%= section.name %></td>
+	     <td colspan="20"><%= section.email %></td>
+    </tr>
+		<% end %>
+		
+	</tbody>
+</table>

@@ -1,0 +1,11 @@
+<%= form_for :session, url: root_path do |f| %>
+          <div class="form-group">
+            <%= f.label :id %>
+            <%= f.text_field :id %>
+          </div>
+          <div class="form-group">
+            <%= f.label :password %>
+            <%= f.password_field :password %>
+          </div>
+      <%= f.submit "log in" %>
+    <% end %>

@@ -1,0 +1,24 @@
+<h1>役職管理</h1>
+<table>
+	<tbody>
+		<tr>
+			<td colspan="10">役職</td>
+		</tr>
+		<tr>
+			<%= form_for @position do |f| %>
+			<td colspan="10"><%= f.label :name %><%= f.text_field :name %></td>
+			<td colspan="2"><%= f.submit "登録" %></td>
+			<% end %>
+		</tr>
+		<tr>
+		  <td colspan="10">役職</td>
+		</tr>
+		
+		<% @positions.each do |position| %>
+		<tr>
+	     <td colspan="10"><%= position.name %></td>
+    </tr>
+		<% end %>
+		
+	</tbody>
+</table>
