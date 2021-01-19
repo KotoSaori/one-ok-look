@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_admin, :logged_in?
   
   def current_admin
-    @current_admin ||= Admin.find_by(id: session[:id])
+    @current_admin ||= Admin.find_by(id: session[:admin_id])
   end
 
   def logged_in?

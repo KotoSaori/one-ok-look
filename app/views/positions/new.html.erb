@@ -1,23 +1,29 @@
 <h1>役職管理</h1>
 <table>
-	<tbody>
+	
+	<thead>
 		<tr>
 			<td colspan="10">役職</td>
+			<td colspan="2"></td>
 		</tr>
+	</thead>
+	<tbody>
 		<tr>
 			<%= form_for @position do |f| %>
-			<td colspan="10"><%= f.label :name %><%= f.text_field :name %></td>
+			<td colspan="10"><%= f.label :役職名 %><%= f.text_field :name %></td>
 			<td colspan="2"><%= f.submit "登録" %></td>
 			<% end %>
 		</tr>
 		<tr>
-		  <td colspan="10">役職</td>
+			<td colspan="10">役職</td>
+			<td colspan="2"></td>
 		</tr>
 		
 		<% @positions.each do |position| %>
 		<tr>
-	     <td colspan="10"><%= position.name %></td>
-    </tr>
+	    	<td colspan="10"><%= position.name %></td>
+	    	<td colspan="2"></td>
+    	</tr>
 		<% end %>
 		
 	</tbody>

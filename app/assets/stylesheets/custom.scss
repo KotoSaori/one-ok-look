@@ -23,3 +23,93 @@ th {
   width: 100%;
   z-index: 10000;
 }
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.btn {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  border: solid 1px #26344a;
+  cursor: pointer;
+}
+
+.btn__text{
+  display: block;
+  overflow: hidden;
+  text-indent: 100%;
+  white-space: nowrap;
+}
+
+.btn__menu{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 24px;
+  height: 2px;
+  background: #26344a;
+  margin: 0;
+  padding: 0;
+  border: none;
+  transition: all 0.5s;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+.btn__menu::before{
+  display: block;
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #26344a;
+  transition: all 0.5s;
+}
+
+.btn__menu::after{
+  display: block;
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #26344a;
+  transition: all 0.5s;
+}
+
+.btn__menu.active{
+  background: transparent;
+}
+
+.btn__menu.active::before{
+  top: 0;
+  transform: rotate(-45deg);
+}
+
+.btn__menu.active::after{
+  bottom: 0;
+  transform: rotate(45deg);
+}
+
+
+.p-global-nav{
+  position: absolute;
+  top: 64px;
+  left: -120%;
+  background: #fff;
+  transition: all 0.5s;
+}
+.p-global-nav.active{
+  left: 0;
+}

@@ -14,13 +14,34 @@
       <div class="alert alert-<%= key %>" role="alert"><%= value %></div>
     <% end %>
     
-    
+    <!--------メニューバー-------->
+    <div class="btn">
+      <button class="btn__menu" type="button">
+        <span class="btn__text">Menu</span>
+      </button>
+    </div>
+
+    <nav class="p-global-nav">
+      <ul>
+        <li><a href= new_user_path >ユーザー管理</a></li>
+        <li><a href= new_section_path >部署管理</a></li>
+        <li><a href= new_position_path >役職管理</a></li>
+        <li><a href= new_holiday_path >休業日管理</a></li>
+        <li><a href= logout_path >ログアウト</a></li>
+      </ul>
+    </nav>
+    <!--------メニューバーここまで-------->
 
     <%= yield %>
     
     <script>
       $(function(){
         $(".alert").fadeOut(5000);
+      });
+      
+      $('.btn').on('click', function(){
+  	    $('.btn__menu').toggleClass('active');
+  	    $('.p-global-nav').toggleClass('active');
       });
     </script>
     

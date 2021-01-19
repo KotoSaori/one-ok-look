@@ -1,27 +1,33 @@
 <h1>部署管理</h1>
 <table>
-	<tbody>
+
+	<thead>
 		<tr>
 			<td colspan="10">部署</td>
 			<td colspan="20">部署共有アドレス</td>
+			<td colspan="2"></td>
 		</tr>
+	</thead>
+	<tbody>
 		<tr>
 			<%= form_for @section do |f| %>
-			<td colspan="10"><%= f.label :name %><%= f.text_field :name %></td>
+			<td colspan="10"><%= f.label :部署名 %><%= f.text_field :name %></td>
 			<td colspan="20"><%= f.label :email %><%= f.text_field :email %></td>
 			<td colspan="2"><%= f.submit "登録" %></td>
 			<% end %>
 		</tr>
 		<tr>
-		  <td colspan="10">部署</td>
+		  	<td colspan="10">部署</td>
 			<td colspan="20">部署共有アドレス</td>
+			<td colspan="2"></td>
 		</tr>
 		
 		<% @sections.each do |section| %>
 		<tr>
-	     <td colspan="10"><%= section.name %></td>
-	     <td colspan="20"><%= section.email %></td>
-    </tr>
+		    <td colspan="10"><%= section.name %></td>
+		    <td colspan="20"><%= section.email %></td>
+		    <td colspan="2"></td>
+    	</tr>
 		<% end %>
 		
 	</tbody>

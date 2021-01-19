@@ -1,43 +1,51 @@
-   
-  <!--ループでまわしてﾕｰｻﾞｰ一覧を可変表示させる-->
+
   <!--f.submit はdoからendまでの間に一回しかつかえない-->
   
 <h1>ユーザー管理</h1> 
 <table>
+	<thead>
+		<tr>
+		  	<td colspan="2">CODE</td>
+			<td colspan="8">部署</td>
+			<td colspan="2">役職</td>
+			<td colspan="8">氏名</td>
+			<td colspan="8">仮パスワード</td>
+			<td colspan="2"></td>
+		</tr>
+	</thead>
 	<tbody>
 		<tr>
-		  	<td colspan="2">CODE</td>
-			<td colspan="8">部署</td>
-			<td colspan="2">役職</td>
-			<td colspan="8">氏名</td>
-			<td colspan="8">仮パスワード</td>
-		</tr>
-		<tr>
 			<%= form_for @user do |f| %>
-			<td colspan="2"><%= f.label :code %><%= f.text_field :code %></td>
-			<td colspan="8"><%= f.label :section_id %><%= f.select :section_id, [section.id, section.name] %></td>
-			<td colspan="2"><%= f.label :position_id %><%= f.select :position_id, [position.id, position.name] %></td>
-			<td colspan="8"><%= f.label :name %><%= f.text_field :name %></td>
-			<td colspan="8"><%= f.label :password %><%= f.password_field :password %></td>
-			<td colspan="2"><%= f.submit "登録" %></td>
+				<td colspan="2"><%= f.label :code %><%= f.text_field :code %></td>
+				<td colspan="8"><%= f.label :section_id %><%= f.select :section_id, Section.all {|section| [section.name]} %></td>
+				<td colspan="2"><%= f.label :position_id %><%= f.select :position_id, Position.all {|position| [position.name]} %></td>
+				<td colspan="8"><%= f.label :name %><%= f.text_field :name %></td>
+				<td colspan="8"><%= f.label :password %><%= f.password_field :password %></td>
+				<td colspan="2"><%= f.submit "登録" %></td>
 			<% end %>
 		</tr>
+		
 		<tr>
 		  	<td colspan="2">CODE</td>
 			<td colspan="8">部署</td>
 			<td colspan="2">役職</td>
 			<td colspan="8">氏名</td>
 			<td colspan="8">仮パスワード</td>
+			<td colspan="2"></td>
+			<td colspan="2"></td>
 		</tr>
 		
+		
 		<% @users.each do |user| %>
-		<tr>
-	       <td colspan="2"><%= user.code %></td>
-	       <td colspan="8"><%= user.section %></td>
-	       <td colspan="2"><%= user.position %></td>
-	       <td colspan="8"><%= user.name %></td>
-	       <td colspan="8"><%= user.password %></td>
-    	</tr>
+			<tr>
+			    <td colspan="2"><%= user.code %></td>
+			    <td colspan="8"><%= user.section %></td>
+			    <td colspan="2"><%= user.position %></td>
+			    <td colspan="8"><%= user.name %></td>
+			    <td colspan="8"><%= user.password %></td>
+			    <td colspan="2"><%= link_to("編集", new_user_path, {method: "post"}) %></td>
+			    <td colspan="2"><%= link_to("削除", new_user_path, {method: "patch"}) %></td>
+		    </tr>
 		<% end %>
 		
 		
