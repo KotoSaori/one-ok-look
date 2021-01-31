@@ -5,6 +5,7 @@
 		<tr>
 			<td colspan="10">役職</td>
 			<td colspan="2"></td>
+			<td colspan="2"></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -12,19 +13,39 @@
 			<%= form_for @position do |f| %>
 			<td colspan="10"><%= f.label :役職名 %><%= f.text_field :name %></td>
 			<td colspan="2"><%= f.submit "登録" %></td>
+			<td colspan="2"></td>
 			<% end %>
 		</tr>
 		<tr>
 			<td colspan="10">役職</td>
 			<td colspan="2"></td>
+			<td colspan="2"></td>
 		</tr>
 		
 		<% @positions.each do |position| %>
 		<tr>
-	    	<td colspan="10"><%= position.name %></td>
-	    	<td colspan="2"></td>
-    	</tr>
+	    	<td colspan="10"><%= text_field :position, :name, :value => position.name %></td>
+	    	<td colspan="2"><input type="button" value="更新" onclick="clickBtn3()"></td>
+			  <td colspan="2"><input type="button" value="削除" onclick="clickBtn3()"></td>
+    </tr>
 		<% end %>
+		
+		<script>
+		function clickBtn3(){
+			
+			if (document.getElementById("b3").readOnly === true){
+				// readonly属性を削除
+				document.getElementById("b3").removeAttribute("readOnly");
+				document.getElementById("b3").style.background = "white";
+				document.getElementById("b3").style.color = "black";
+			}else{
+				// readonly属性を設定
+				document.getElementById("b3").setAttribute("readOnly", true);
+				document.getElementById("b3").style.background = 'rgb(235,235,228)';
+				document.getElementById("b3").style.color = 'rgb(255,255,255)';
+			}
+		}
+		</script>
 		
 	</tbody>
 </table>

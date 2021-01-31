@@ -1,34 +1,30 @@
-<h1>部署管理</h1>
+<h1>休業日管理</h1>
 <table>
-
+	
 	<thead>
 		<tr>
-			<td colspan="10">部署</td>
-			<td colspan="20">部署共有アドレス</td>
+			<td colspan="15">会社休業日</td>
 			<td colspan="2"></td>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
-			<%= form_for @section do |f| %>
-			<td colspan="10"><%= f.label :部署名 %><%= f.text_field :name %></td>
-			<td colspan="20"><%= f.label :email %><%= f.text_field :email %></td>
+			<%= form_for @company_holiday do |f| %>
+			<td colspan="15"><%= f.label :会社休業日 %><%= f.date_field :holiday %></td>
 			<td colspan="2"><%= f.submit "登録" %></td>
 			<% end %>
 		</tr>
 		<tr>
-		  <td colspan="10">部署</td>
-			<td colspan="20">部署共有アドレス</td>
+			<td colspan="15">会社休業日</td>
 			<td colspan="2"></td>
 		</tr>
 		
-		<% @sections.each do |section| %>
+		<% @company_holidays.each do |company_holiday| %>
 		<tr>
-		    <td colspan="10"><%= text_field :section, :name, :value => section.name %></td>
-		    <td colspan="20"><%= text_field :section, :email, :value => section.email %></td>
+	    	<td colspan="15"><%= text_field :company_holiday, :holiday, :value => company_holiday.holiday %></td>
 	    	<td colspan="2"><input type="button" value="更新" onclick="clickBtn3()"></td>
-	    	<td colspan="2"><input type="button" value="削除" onclick="clickBtn3()"></td>
-    	</tr>
+			  <td colspan="2"><input type="button" value="削除" onclick="clickBtn3()"></td>
+    </tr>
 		<% end %>
 		
 		<script>
@@ -50,3 +46,7 @@
 		
 	</tbody>
 </table>
+
+
+
+

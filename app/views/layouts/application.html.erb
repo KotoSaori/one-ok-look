@@ -23,11 +23,11 @@
 
     <nav class="p-global-nav">
       <ul>
-        <li><a href= new_user_path >ユーザー管理</a></li>
-        <li><a href= new_section_path >部署管理</a></li>
-        <li><a href= new_position_path >役職管理</a></li>
-        <li><a href= new_holiday_path >休業日管理</a></li>
-        <li><a href= logout_path >ログアウト</a></li>
+        <li><%= link_to 'ユーザー管理', new_user_path %></li>
+        <li><%= link_to '部署管理', new_section_path %></li>
+        <li><%= link_to '役職管理', new_position_path %></li>
+        <li><%= link_to '休業日管理', new_company_holiday_path %></li>
+        <li><%= link_to 'ログアウト', sessions_new, method: :delete do %></li>
       </ul>
     </nav>
     <!--------メニューバーここまで-------->

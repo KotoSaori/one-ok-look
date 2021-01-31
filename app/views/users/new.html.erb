@@ -17,8 +17,8 @@
 		<tr>
 			<%= form_for @user do |f| %>
 				<td colspan="2"><%= f.label :code %><%= f.text_field :code %></td>
-				<td colspan="8"><%= f.label :section_id %><%= f.select :section_id, Section.all {|section| [section.name]} %></td>
-				<td colspan="2"><%= f.label :position_id %><%= f.select :position_id, Position.all {|position| [position.name]} %></td>
+				<td colspan="8"><%= f.label :section_id %><%= f.collection_select :section_id, Section.all, :id, :name, include_blank: "選択して下さい" %></td>
+				<td colspan="2"><%= f.label :position_id %><%= f.collection_select :position_id, Position.all, :id, :name, include_blank: "選択して下さい" %></td>
 				<td colspan="8"><%= f.label :name %><%= f.text_field :name %></td>
 				<td colspan="8"><%= f.label :password %><%= f.password_field :password %></td>
 				<td colspan="2"><%= f.submit "登録" %></td>
@@ -26,7 +26,7 @@
 		</tr>
 		
 		<tr>
-		  	<td colspan="2">CODE</td>
+		  <td colspan="2">CODE</td>
 			<td colspan="8">部署</td>
 			<td colspan="2">役職</td>
 			<td colspan="8">氏名</td>
@@ -36,17 +36,143 @@
 		</tr>
 		
 		
-		<% @users.each do |user| %>
+		<% @users.each do |user| %>  
 			<tr>
-			    <td colspan="2"><%= user.code %></td>
-			    <td colspan="8"><%= user.section %></td>
-			    <td colspan="2"><%= user.position %></td>
-			    <td colspan="8"><%= user.name %></td>
-			    <td colspan="8"><%= user.password %></td>
-			    <td colspan="2"><%= link_to("編集", new_user_path, {method: "post"}) %></td>
-			    <td colspan="2"><%= link_to("削除", new_user_path, {method: "patch"}) %></td>
+			    <td colspan="2"><%= text_field :user, :code, :id => "usercode" + user.id.to_s, :value => user.code %></td>
+			    <td colspan="8"><%= text_field :user, :section_id, :id => "usersection"+ user.id.to_s, :value => user.section.name %></td>
+			    <td colspan="2"><%= text_field :user, :position_id, :id => "userposition" + user.id.to_s, :value => user.position.name %></td>
+			    <td colspan="8"><%= text_field :user, :name, :id => "username" + user.id.to_s, :value => user.name %></td>
+			    <td colspan="8"><%= text_field :user, :password, :id => "userpw" + user.id.to_s, :value => user.password %></td>
+			    <td colspan="2"><button class="button" data-id=<%= user.id %>>更新</button></td>
+			    <td colspan="2"><button class="button" data-id=<%= user.id %>>削除</button></td>
 		    </tr>
 		<% end %>
+		
+		<script>
+	　
+	　	
+	　// <---ここから---for文で繰り返し処理を試したが[var row.variable[i] = row.idvalue[i]+click;]のところでエラー--->
+	 // var row = [
+		//   {'variable': 'code_id', 'idvalue': 'usercode'},  // 0番目のオブジェクト変数
+		//   {'variable': 'section_id', 'idvalue': 'usersection'},  // 1番目のオブジェクト変数
+		//   {'variable': 'position_id', 'idvalue': 'userposition'},  // 2番目のオブジェクト変数
+		//   {'variable': 'name_id', 'idvalue': 'username'},  // 3番目のオブジェクト変数
+		//   {'variable': 'pw_id', 'idvalue': 'userpw'},  // 4番目のオブジェクト変数
+	 // ];
+	  
+	 // for (var i = 0; i < row.length; i++){
+	　// // 指定ボタンを押下すると処理を開始する
+	　// $('.button').on('click', function(){
+  //          var click = $(this).data('id');
+  //          var row.variable[i] = row.idvalue[i]+click;
+  //          console.log(row.variable[i]);
+		// 				if (document.getElementById(row.variable[i]).readOnly === true){
+		// 					// readonly属性を削除
+		// 						document.getElementById(row.variable[i]).removeAttribute("readOnly");
+		// 						document.getElementById(row.variable[i]).style.background = "#FFFFE0";
+		// 						document.getElementById(row.variable[i]).style.color = "black";
+		// 				}else{
+		// 					// readonly属性を設定
+		// 						document.getElementById(row.variable[i]).setAttribute("readOnly", true);
+		// 						document.getElementById(row.variable[i]).style.background = "#F0FFF0";
+		// 						document.getElementById(row.variable[i]).style.color = "black";
+		// 				}
+  //    });
+	 // }
+	  //<---ここまで---for文で繰り返し処理トライして失敗--->
+	  
+	  
+	  $('.button').on('click', function(){
+            var click =  $(this).data('id');
+            var code_id = "usercode"+click
+            console.log(code_id)
+						if (document.getElementById(code_id).readOnly === true){
+							// readonly属性を削除
+								document.getElementById(code_id).removeAttribute("readOnly");
+								document.getElementById(code_id).style.background = "#FFFFE0";
+								document.getElementById(code_id).style.color = "black";
+						}else{
+							// readonly属性を設定
+								document.getElementById(code_id).setAttribute("readOnly", true);
+								document.getElementById(code_id).style.background = "#F0FFF0";
+								document.getElementById(code_id).style.color = "black";
+						}
+      });
+      
+      
+      $('.button').on('click', function(){
+            var click =  $(this).data('id');
+            var section_id = "usersection"+click
+            console.log(section_id)
+						if (document.getElementById(section_id).readOnly === true){
+							// readonly属性を削除
+								document.getElementById(section_id).removeAttribute("readOnly");
+								document.getElementById(section_id).style.background = "#FFFFE0";
+								document.getElementById(section_id).style.color = "black";
+						}else{
+							// readonly属性を設定
+								document.getElementById(section_id).setAttribute("readOnly", true);
+								document.getElementById(section_id).style.background = "#F0FFF0";
+								document.getElementById(section_id).style.color = "black";
+						}
+      });
+      
+      
+      $('.button').on('click', function(){
+            var click = $(this).data('id');
+            var position_id = "userposition"+click;
+            console.log(position_id);
+						if (document.getElementById(position_id).readOnly === true){
+							// readonly属性を削除
+								document.getElementById(position_id).removeAttribute("readOnly");
+								document.getElementById(position_id).style.background = "#FFFFE0";
+								document.getElementById(position_id).style.color = "black";
+						}else{
+							// readonly属性を設定
+								document.getElementById(position_id).setAttribute("readOnly", true);
+								document.getElementById(position_id).style.background = "#F0FFF0";
+								document.getElementById(position_id).style.color = "black";
+						}
+      });
+      
+      
+      $('.button').on('click', function(){
+            var click = $(this).data('id');
+            var name_id = "username"+click;
+            console.log(name_id);
+						if (document.getElementById(name_id).readOnly === true){
+							// readonly属性を削除
+								document.getElementById(name_id).removeAttribute("readOnly");
+								document.getElementById(name_id).style.background = "#FFFFE0";
+								document.getElementById(name_id).style.color = "black";
+						}else{
+							// readonly属性を設定
+								document.getElementById(name_id).setAttribute("readOnly", true);
+								document.getElementById(name_id).style.background = "#F0FFF0";
+								document.getElementById(name_id).style.color = "black";
+						}
+      });
+      
+      
+      $('.button').on('click', function(){
+            var click = $(this).data('id');
+            var pw_id = "userpw"+click;
+            console.log(pw_id);
+						if (document.getElementById(pw_id).readOnly === true){
+							// readonly属性を削除
+								document.getElementById(pw_id).removeAttribute("readOnly");
+								document.getElementById(pw_id).style.background = "#FFFFE0";
+								document.getElementById(pw_id).style.color = "black";
+						}else{
+							// readonly属性を設定
+								document.getElementById(pw_id).setAttribute("readOnly", true);
+								document.getElementById(pw_id).style.background = "#F0FFF0";
+								document.getElementById(pw_id).style.color = "black";
+						}
+      });
+      
+      
+		</script>
 		
 		
 	</tbody>

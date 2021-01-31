@@ -6,11 +6,16 @@ Rails.application.routes.draw do
   # トップページは管理者ログイン画面
   root 'sessions#new'
   get 'sessions/new'
+  get 'sessions/new', to: 'sessions#new'
+  post 'sessions/new', to: 'sessions#create'
+  delete 'sessions/new', to: 'sessions#destroy'
   
   resources :users
   resources :positions
   resources :sections
+  resources :company_holidays
   
+  # <---ここから---as: 'Prefix'は重複ダメ--->
   # post   '/login',   to: 'sessions#create'
   # delete '/logout',  to: 'sessions#destroy'
   
@@ -28,5 +33,6 @@ Rails.application.routes.draw do
   # post '/sections/new', to: 'sections#create', as: 'new_sections'
   # patch '/sections/new', to: 'sections#update', as: 'new_sections'
   # delete '/sections/new', to: 'sections#destroy', as: 'new_sections'
+  # <---ここまで---as: 'Prefix'は重複ダメ--->
   
 end
