@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get 'sessions/new'
   get 'sessions/new', to: 'sessions#new'
   post 'sessions/new', to: 'sessions#create'
-  delete 'sessions/new', to: 'sessions#destroy'
+  delete 'logout', to: 'sessions#destroy'  # メニューバーからログアウトするときどう書くの？
   
   resources :users
   resources :positions
