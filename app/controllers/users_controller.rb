@@ -22,14 +22,14 @@ class UsersController < ApplicationController
   
   private
   def user_params
-    params.require(:user).permit(:code, :section_id, :position_id, :name, :password)
+    params.require(:user).permit(:code, :section_id, :position_id, :name, :password, :password_confirmation)
   end
   
   def show
   end
   
   def destroy
-  #   user = User.find_by(admin_id: current_admin.id, user_id: params[:user_id])
+  #   user = User.find_by(admin_id: current_admin.id, user_id: params[:user_id])  # 登録者はadmin!
   #   user.destroy
   #   flash[:succes]="ユーザーを削除しました"
   #   redirect_to new_user_path

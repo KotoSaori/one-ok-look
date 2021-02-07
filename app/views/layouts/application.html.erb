@@ -15,21 +15,24 @@
     <% end %>
   
     <!--------メニューバー-------->
+    <% if logged_in? %>
     <div class="btn">
       <button class="btn__menu" type="button">
         <span class="btn__text">Menu</span>
       </button>
     </div>
-
     <nav class="p-global-nav">
       <ul>
-        <li><%= link_to 'ユーザー管理', new_user_path %></li>
-        <li><%= link_to '部署管理', new_section_path %></li>
-        <li><%= link_to '役職管理', new_position_path %></li>
-        <li><%= link_to '休業日管理', new_company_holiday_path %></li>
-        <li><%= link_to 'ログアウト', logout_path, method: :delete %></li>
+          <li><%= link_to 'ユーザー管理', new_user_path %></li>
+          <li><%= link_to '部署管理', new_section_path %></li>
+          <li><%= link_to '役職管理', new_position_path %></li>
+          <li><%= link_to '休業日管理', new_company_holiday_path %></li>
+          <li><%= link_to 'ログアウト', logout_path, method: :delete %></li>
       </ul>
     </nav>
+    <%# else %>
+          <!--<li><%#= link_to 'ログイン', login_path %></li>-->
+    <% end %>
     <!--------メニューバーここまで-------->
 
     <%= yield %>

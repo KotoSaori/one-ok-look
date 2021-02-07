@@ -24,28 +24,70 @@
 		
 		<% @sections.each do |section| %>
 		<tr>
-		    <td colspan="10"><%= text_field :section, :name, :value => section.name %></td>
-		    <td colspan="20"><%= text_field :section, :email, :value => section.email %></td>
-	    	<td colspan="2"><input type="button" value="更新" onclick="clickBtn3()"></td>
-	    	<td colspan="2"><input type="button" value="削除" onclick="clickBtn3()"></td>
-    	</tr>
+		    <td colspan="10"><%= text_field :section, :name, :id => "section_name" + section.id.to_s, :value => section.name, :readOnly => true %></td>
+		    <td colspan="20"><%= text_field :section, :email, :id => "section_email" + section.id.to_s, :value => section.email, :readOnly => true %></td>
+	    	<td colspan="2"><button class="edit_button" id="edit_button<%= section.id %>" data-id=<%= section.id %>>編集切替</button></td>
+			  <td colspan="2"><button class="update_button" id="update_button<%= section.id %>" disabled data-id=<%= section.id %>>更新</button></td>
+			  <td colspan="2"><button class="delete_button" id="delete_button<%= section.id %>" data-id=<%= section.id %>>削除</button></td>
+    </tr>
 		<% end %>
 		
+		
 		<script>
-		function clickBtn3(){
-			
-			if (document.getElementById("b3").readOnly === true){
-				// readonly属性を削除
-				document.getElementById("b3").removeAttribute("readOnly");
-				document.getElementById("b3").style.background = "white";
-				document.getElementById("b3").style.color = "black";
-			}else{
-				// readonly属性を設定
-				document.getElementById("b3").setAttribute("readOnly", true);
-				document.getElementById("b3").style.background = 'rgb(235,235,228)';
-				document.getElementById("b3").style.color = 'rgb(255,255,255)';
-			}
-		}
+		$('.edit_button').on('click', function(){
+            var click =  $(this).data('id');
+            var name_id = "section_name"+click;
+            var edit_button_id = "edit_button"+click;
+            var update_button_id = "update_button"+click;
+            var delete_button_id = "delete_button"+click;
+           
+						if (document.getElementById(name_id).readOnly === true){
+							// フィールド内のreadonly属性を削除
+								document.getElementById(name_id).removeAttribute("readOnly");
+								document.getElementById(name_id).style.background = "#EEEEEE";
+								document.getElementById(name_id).style.color = "black";
+						}else{
+							// フィールド内のreadonly属性を設定
+								document.getElementById(name_id).setAttribute("readOnly", true);
+								document.getElementById(name_id).style.background = "White";
+								document.getElementById(name_id).style.color = "black";
+						}
+						if (document.getElementById(name_id).readOnly === true){
+								// 更新ボタンのdisabled属性を設定
+								document.getElementById(update_button_id).setAttribute("disabled", true);
+								document.getElementById(update_button_id).style.color = "White";
+								// 削除ボタンのdisabled属性を削除
+								document.getElementById(delete_button_id).removeAttribute("disabled");
+								document.getElementById(delete_button_id).style.color = "black"
+								
+						}else{
+								// 更新ボタンのdisabled属性を設定
+								document.getElementById(update_button_id).removeAttribute("disabled");
+								document.getElementById(update_button_id).style.color = "black";
+							  // 削除ボタンのdisabled属性を設定
+								document.getElementById(delete_button_id).setAttribute("disabled", true);
+								document.getElementById(delete_button_id).style.color = "White";
+						}
+      });
+      
+      
+      $('.edit_button').on('click', function(){
+            var click =  $(this).data('id');
+            var email_id = "section_email"+click
+            // console.log(email_id)
+						if (document.getElementById(email_id).readOnly === true){
+							// readonly属性を削除
+								document.getElementById(email_id).removeAttribute("readOnly");
+								document.getElementById(email_id).style.background = "#EEEEEE";
+								document.getElementById(email_id).style.color = "black";
+						}else{
+							// readonly属性を設定
+								document.getElementById(email_id).setAttribute("readOnly", true);
+								document.getElementById(email_id).style.background = "White";
+								document.getElementById(email_id).style.color = "black";
+						}
+      });
+      
 		</script>
 		
 	</tbody>

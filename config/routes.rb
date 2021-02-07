@@ -5,10 +5,9 @@ Rails.application.routes.draw do
   
   # トップページは管理者ログイン画面
   root 'sessions#new'
-  get 'sessions/new'
-  get 'sessions/new', to: 'sessions#new'
-  post 'sessions/new', to: 'sessions#create'
-  delete 'logout', to: 'sessions#destroy'  # メニューバーからログアウトするときどう書くの？
+  get 'login', to: 'sessions#new'
+  post 'login', to: 'sessions#create'
+  delete 'logout', to: 'sessions#destroy'
   
   resources :users
   resources :positions
