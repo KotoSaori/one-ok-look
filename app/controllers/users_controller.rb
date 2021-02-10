@@ -2,9 +2,8 @@ class UsersController < ApplicationController
   def new
     @user = User.new
     @users = User.all
-    @section = Section.all
-    @position = Position.all
-    
+    @sections = Section.all
+    @positions = Position.all
   end
   
   def create
@@ -20,22 +19,66 @@ class UsersController < ApplicationController
     end
   end
   
-  private
-  def user_params
-    params.require(:user).permit(:code, :section_id, :position_id, :name, :password, :password_confirmation)
-  end
   
   def show
   end
   
-  def destroy
-  #   user = User.find_by(admin_id: current_admin.id, user_id: params[:user_id])  # 登録者はadmin!
+  
+  # def destroy
+  #   # binding.pry
+  #   user = User.find_by(id: params[:id])
   #   user.destroy
   #   flash[:succes]="ユーザーを削除しました"
   #   redirect_to new_user_path
+  # end
+  
+
+    # def update
+    #   # binding.pry
+    #   @user = User.find(id: params[:id])
+    #   if @user.update(user_params2)
+    #     redirect_to new_user_path, success: '更新完了！'
+    #   else
+    #   # binding.pry
+    #     flash.now[:danger] = "更新失敗！"
+    #     @users = User.all
+    #     render :new
+    #   end  
+    # end
+  
+  def update
+    @user = User.new #←エラーが出るので記載してみたがおかしいか？
+    # name属性で条件分岐
+    # binding.pry
+    if params[:update]
+        update_user = User.find( params[:id] )
+        binding.pry
+        if update_user.update_attributes( :code => params[:user][:code], :section_id => params[:user][:section_id], :position_id => params[:user][:position_id], :name => params[:user][:name])
+          redirect_to new_user_path, success: '更新完了！'
+        else
+        # binding.pry
+          flash.now[:danger] = "更新失敗！"
+          @users = User.all
+          render :new
+        end
+    elsif params[:delete]
+        destroy_user = User.find( params[:id] )
+        destroy_user.destroy
+        flash[:succes]="ユーザーを削除しました"
+        redirect_to new_user_path
+    end
+    # name属性で条件分岐ここまで
   end
   
-  def edit
+  
+  private
+  def user_params
+    params.require(:user).permit(:code, :section_id, :position_id, :name, :password)
   end
+  
+  
+  # def user_params2
+  #   params.require(:user).permit(:code, :section_id, :position_id, :name)
+  # end
   
 end
