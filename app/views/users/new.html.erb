@@ -23,14 +23,14 @@
 		</tr>
 		
 		<tr>
-		    <td colspan="2">CODE</td>
+		  <td colspan="2">CODE</td>
 			<td colspan="8">部署</td>
 			<td colspan="2">役職</td>
 			<td colspan="8">氏名</td>
 			<td colspan="8">パスワード</td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
-			<td colspan="2"></td>
+			<td colspan="2">　　</td>　　　　　　　<!--文字の数のスペースあけた -->
+			<td colspan="5">　　　　　　　</td>　　<!--文字の数のスペースあけた -->
+			<td colspan="2">　　</td>　　　　　　　<!--文字の数のスペースあけた -->
 		</tr>
 		
 		
@@ -53,11 +53,11 @@
 			    	<%= f.password_field :password, :id => "userpw" + user.id.to_s, :value => user.password, :readOnly => true, :style => "border: none" %>
 			    </td>
 			    <td colspan="2">
-			    	<%= button_tag "編集", type: "button", class: "edit_button", id: "edit_button#{user.id}", data: {id: user.id} %>
+			    	<%= button_tag '編集', type: "button", class: "edit_button", id: "edit_button#{user.id}", data: {id: user.id} %>
 			    </td>
-			    <td colspan="2"> 
+			    <td colspan="5"> 
 			        <%= f.submit '更新', :name => 'update', class: "update_button", id: "update_button#{user.id}", disabled: true, data: {id: user.id} %>
-			        <%= f.submit 'キャンセル', :name => 'update', class: "updatecancel_button", id: "updatecancel_button#{user.id}", disabled: true, data: {id: user.id} %>
+			        <%= button_tag 'キャンセル',  type: "button", class: "updatecancel_button", id: "updatecancel_button#{user.id}", disabled: true, data: {id: user.id} %>
 					</td>
 					<td colspan="2">
 					    <%= f.submit '削除', :name => 'delete', class: "delete_button", id: "delete_button#{user.id}", data: {id: user.id} %>
@@ -83,16 +83,13 @@
             console.log(code_id);
             console.log(edit_button_id);
             console.log(update_button_id);
+            console.log(updatecancel_button_id);
             console.log(delete_button_id);
             console.log(section_id);
             console.log(position_id);
             console.log(name_id);
             console.log(pw_id);
 						
-								 // フィールド内のreadonly属性を削除
-								// document.getElementById(code_id).removeAttribute("readOnly");
-								// document.getElementById(code_id).style.background = "#EEEEEE";
-								// document.getElementById(code_id).style.color = "black";
 								removereadonly(code_id);
 								removedisabled(section_id);
 								removedisabled(position_id);
@@ -119,33 +116,30 @@
             console.log(code_id);
             console.log(edit_button_id);
             console.log(update_button_id);
+            console.log(updatecancel_button_id);
             console.log(delete_button_id);
             console.log(section_id);
             console.log(position_id);
             console.log(name_id);
             console.log(pw_id);
 						
-								 // フィールド内のreadonly属性を削除
-								// document.getElementById(code_id).removeAttribute("readOnly");
-								// document.getElementById(code_id).style.background = "#EEEEEE";
-								// document.getElementById(code_id).style.color = "black";
-								
-								removereadonly(code_id);  //↓逆にする
-								removedisabled(section_id);
-								removedisabled(position_id);
-								removereadonly(name_id);
-								removereadonly(pw_id);
-								setdisabled(edit_button_id);
-								removedisabled(update_button_id);
-								removedisabled(updatecancel_button_id);
-								setdisabled(delete_button_id);
+							
+								setreadonly(code_id);  //'.edit_button').on('click'の挙動の逆
+								setdisabled(section_id);
+								setdisabled(position_id);
+								setreadonly(name_id);
+								setreadonly(pw_id);
+								removedisabled(edit_button_id);
+								setdisabled(update_button_id);
+								setdisabled(updatecancel_button_id);
+								removedisabled(delete_button_id);
 					
     });
     
     function setreadonly(selecter_id) {
-	    						document.getElementById(selecter_id).setAttribute("readOnly", true);
-									document.getElementById(selecter_id).style.background = "White";
-									document.getElementById(selecter_id).style.color = "black";	
+	    					document.getElementById(selecter_id).setAttribute("readOnly", true);
+								document.getElementById(selecter_id).style.background = "White";
+								document.getElementById(selecter_id).style.color = "black";	
     }
     function removereadonly(selecter_id) {
 	    					document.getElementById(selecter_id).removeAttribute("readOnly");
@@ -153,7 +147,7 @@
 								document.getElementById(selecter_id).style.color = "black";
     }
     function setdisabled(selecter_id) {
-	    						document.getElementById(selecter_id).setAttribute("disabled", true);
+	    					document.getElementById(selecter_id).setAttribute("disabled", true);
 								document.getElementById(selecter_id).style.background = "White";
 								document.getElementById(selecter_id).style.color = "black";	
     }

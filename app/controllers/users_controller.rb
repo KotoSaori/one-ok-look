@@ -55,7 +55,7 @@ class UsersController < ApplicationController
           # binding.pry
           redirect_to new_user_path, success: '更新完了！'
         else
-        binding.pry
+        # binding.pry
           flash.now[:danger] = "更新失敗！"
           @users = User.all
           @user = User.new
