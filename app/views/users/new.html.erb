@@ -57,7 +57,7 @@
 			    </td>
 			    <td colspan="5"> 
 			        <%= f.submit '更新', :name => 'update', class: "update_button", id: "update_button#{user.id}", disabled: true, data: {id: user.id} %>
-			        <%= button_tag 'キャンセル',  type: "button", class: "updatecancel_button", id: "updatecancel_button#{user.id}", disabled: true, data: {id: user.id} %>
+			        <%= button_tag 'キャンセル', type: "button", class: "updatecancel_button", id: "updatecancel_button#{user.id}", disabled: true, data: {id: user.id} %>
 					</td>
 					<td colspan="2">
 					    <%= f.submit '削除', :name => 'delete', class: "delete_button", id: "delete_button#{user.id}", data: {id: user.id} %>

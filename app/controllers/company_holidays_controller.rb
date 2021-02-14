@@ -1,7 +1,4 @@
 class CompanyHolidaysController < ApplicationController
-  def index
-  end
-  
   def new
     @company_holiday = CompanyHoliday.new
     @company_holidays = CompanyHoliday.all
@@ -25,7 +22,7 @@ class CompanyHolidaysController < ApplicationController
         update_company_holiday = CompanyHoliday.find( params[:id] )
         # binding.pry
         if update_company_holiday.update_attributes(:holiday => params[:company_holiday][:holiday])
-          # binding.pry
+        # binding.pry
           redirect_to new_company_holiday_path, success: '更新完了！'
         else
         # binding.pry

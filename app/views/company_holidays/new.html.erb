@@ -17,21 +17,24 @@
 		<tr>
 			<td colspan="15">会社休業日</td>
 			<td colspan="2"></td>
+			<td colspan="7">　　　　　　　</td>
+			<td colspan="2">　　</td
 		</tr>
 		
 		<% @company_holidays.each do |company_holiday| %>
 			<%= form_for company_holiday, url: company_holiday_path(id: company_holiday.id) do |f| %>
 				<tr>
-			    	<td colspan="15"><%= f.date_field :company_holiday, :id => "companyholiday" + company_holiday.id.to_s, :value => company_holiday.holiday, :readOnly => true %></td>
+			    	<td colspan="15"><%= f.date_field :company_holiday, {:value => company_holiday.holiday, :id => "companyholiday" + company_holiday.id.to_s, :readOnly => true} %></td>
 			    	<td colspan="2">
-			    		<%= button_tag "編集切替", type: "button", class: "edit_button", id: "edit_button#{company_holiday.id}", data: {id: company_holiday.id} %>
+			    		<%= button_tag "編集", type: "button", class: "edit_button", id: "edit_button#{company_holiday.id}", data: {id: company_holiday.id} %>
 			    	</td>
-			    	<td colspan="2"> 
-			        	<%= f.submit '更新', :name => 'update', class: "update_button", id: "update_button#{company_holiday.id}", disabled: true, data: {id: company_holiday.id} %>
-					</td>
-					<td colspan="2">
-					   <%= f.submit '削除', :name => 'delete', class: "delete_button", id: "delete_button#{company_holiday.id}", disabled: true, data: {id: company_holiday.id} %>
-					</td>
+			    	<td colspan="7"> 
+			        <%= f.submit '更新', :name => 'update', class: "update_button", id: "update_button#{company_holiday.id}", disabled: true, data: {id: company_holiday.id} %>
+			       	<%= button_tag 'キャンセル', type: "button", class: "updatecancel_button", id: "updatecancel_button#{company_holiday.id}", disabled: true, data: {id: company_holiday.id} %>
+						</td>
+						<td colspan="2">
+						  <%= f.submit '削除', :name => 'delete', class: "delete_button", id: "delete_button#{company_holiday.id}", data: {id: company_holiday.id} %>
+						</td>
 		    	</tr>
 		    <% end %>
 		<% end %>
@@ -43,32 +46,83 @@
             var holiday_id = "companyholiday"+click;
             var edit_button_id = "edit_button"+click;
             var update_button_id = "update_button"+click;
+            var updatecancel_button_id = "updatecancel_button"+click;
             var delete_button_id = "delete_button"+click;
             
-						if (document.getElementById(holiday_id).readOnly === true){
-								// フィールド内のreadonly属性を削除
-								document.getElementById(holiday_id).removeAttribute("readOnly");
-								document.getElementById(holiday_id).style.background = "#EEEEEE";
-								document.getElementById(holiday_id).style.color = "black";
-								// 更新ボタンのdisabled属性を設定
-								document.getElementById(update_button_id).setAttribute("disabled", true);
-								document.getElementById(update_button_id).style.color = "White";
-								// 削除ボタンのdisabled属性を設定
-								document.getElementById(delete_button_id).setAttribute("disabled", true);
-								document.getElementById(delete_button_id).style.color = "White";
-						}else{
-								// フィールド内のreadonly属性を設定
-								document.getElementById(holiday_id).setAttribute("readOnly", true);
-								document.getElementById(holiday_id).style.background = "White";
-								document.getElementById(holiday_id).style.color = "black";
-								// 更新ボタンのdisabled属性を削除
-								document.getElementById(update_button_id).removeAttribute("disabled");
-								document.getElementById(update_button_id).style.color = "black";
-								// 削除ボタンのdisabled属性を削除
-								document.getElementById(delete_button_id).removeAttribute("disabled");
-								document.getElementById(delete_button_id).style.color = "black";
-						}
+            		removereadonly(holiday_id);
+								setdisabled(edit_button_id);
+								removedisabled(update_button_id);
+								removedisabled(updatecancel_button_id);
+								setdisabled(delete_button_id);
+            
+						// if (document.getElementById(holiday_id).readOnly === true){
+						// 		// フィールド内のreadonly属性を削除
+						// 		document.getElementById(holiday_id).removeAttribute("readOnly");
+						// 		document.getElementById(holiday_id).style.background = "#EEEEEE";
+						// 		document.getElementById(holiday_id).style.color = "black";
+						// 		// 更新ボタンのdisabled属性を設定
+						// 		document.getElementById(update_button_id).setAttribute("disabled", true);
+						// 		document.getElementById(update_button_id).style.color = "White";
+						// 		// 削除ボタンのdisabled属性を設定
+						// 		document.getElementById(delete_button_id).setAttribute("disabled", true);
+						// 		document.getElementById(delete_button_id).style.color = "White";
+						// }else{
+						// 		// フィールド内のreadonly属性を設定
+						// 		document.getElementById(holiday_id).setAttribute("readOnly", true);
+						// 		document.getElementById(holiday_id).style.background = "White";
+						// 		document.getElementById(holiday_id).style.color = "black";
+						// 		// 更新ボタンのdisabled属性を削除
+						// 		document.getElementById(update_button_id).removeAttribute("disabled");
+						// 		document.getElementById(update_button_id).style.color = "black";
+						// 		// 削除ボタンのdisabled属性を削除
+						// 		document.getElementById(delete_button_id).removeAttribute("disabled");
+						// 		document.getElementById(delete_button_id).style.color = "black";
+						// }
       });
+      
+      $('.updatecancel_button').on('click', function(){
+            var click =  $(this).data('id');
+            var holiday_id = "companyholiday"+click;
+            var edit_button_id = "edit_button"+click;
+            var update_button_id = "update_button"+click;
+            var updatecancel_button_id = "updatecancel_button"+click;
+            var delete_button_id = "delete_button"+click;
+            console.log(holiday_id);
+            console.log(edit_button_id);
+            console.log(update_button_id);
+            console.log(updatecancel_button_id);
+            console.log(delete_button_id);
+							
+								setreadonly(holiday_id);
+								removedisabled(edit_button_id);
+								setdisabled(update_button_id);
+								setdisabled(updatecancel_button_id);
+								removedisabled(delete_button_id);
+					
+    });
+      
+    function setreadonly(selecter_id) {
+	    					document.getElementById(selecter_id).setAttribute("readOnly", true);
+								document.getElementById(selecter_id).style.background = "White";
+								document.getElementById(selecter_id).style.color = "black";	
+    }
+    function removereadonly(selecter_id) {
+	    					document.getElementById(selecter_id).removeAttribute("readOnly");
+								document.getElementById(selecter_id).style.background = "#EEEEEE";
+								document.getElementById(selecter_id).style.color = "black";
+    }
+    function setdisabled(selecter_id) {
+	    					document.getElementById(selecter_id).setAttribute("disabled", true);
+								document.getElementById(selecter_id).style.background = "White";
+								document.getElementById(selecter_id).style.color = "black";	
+    }
+    function removedisabled(selecter_id) {
+	    					document.getElementById(selecter_id).removeAttribute("disabled");
+								document.getElementById(selecter_id).style.background = "#EEEEEE";
+								document.getElementById(selecter_id).style.color = "black";
+    }  
+      
+      
 		</script>
 		
 	</tbody>
