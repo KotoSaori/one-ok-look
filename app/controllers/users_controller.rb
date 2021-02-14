@@ -47,18 +47,18 @@ class UsersController < ApplicationController
     # end
   
   def update
-    @user = User.new #←エラーが出るので記載してみたがおかしいか？
-    # name属性で条件分岐
-    # binding.pry
+    # <--name属性で条件分岐-->
     if params[:update]
         update_user = User.find( params[:id] )
-        binding.pry
+        # binding.pry
         if update_user.update_attributes( :code => params[:user][:code], :section_id => params[:user][:section_id], :position_id => params[:user][:position_id], :name => params[:user][:name])
+          # binding.pry
           redirect_to new_user_path, success: '更新完了！'
         else
-        # binding.pry
+        binding.pry
           flash.now[:danger] = "更新失敗！"
           @users = User.all
+          @user = User.new
           render :new
         end
     elsif params[:delete]
@@ -67,7 +67,7 @@ class UsersController < ApplicationController
         flash[:succes]="ユーザーを削除しました"
         redirect_to new_user_path
     end
-    # name属性で条件分岐ここまで
+    # <--name属性で条件分岐ここまで-->
   end
   
   
